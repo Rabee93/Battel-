@@ -12,7 +12,13 @@ get '/sun' do
   "Nice weather"
 end
 
-get '/cat' do
+get '/random-cat' do
   @names = ["Amigo", "Oscar", "Viking"].sample
   erb(:index)
 end
+
+get '/named-cat' do
+  p params
+  p @names = params[:name]
+  erb(:index)
+  end
