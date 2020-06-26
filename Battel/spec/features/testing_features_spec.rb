@@ -7,10 +7,27 @@ end
 
 feature 'Enter Names' do
   scenario 'submitting names' do
-    visit('/')
-    fill_in :player_1_name, with: 'Dave'
-    fill_in :player_2_name, with: 'Mittens'
-    click_button 'Submit'
-    expect(page).to have_content 'Dave vs. Mittens'
+    sign_in_and_play
+  expect(page).to have_content 'Rabee vs. Josh'
   end
-end 
+end
+
+  feature 'hitting points' do
+    scenario 'want to see Player2 hit points' do
+    sign_in_and_play
+      expect(page).to have_content("100 HP")
+    end
+  end
+
+   feature 'displays attack button and confirms attack' do
+     before do
+       sign_in_and_play
+     end
+     scenario 'shows attack button' do
+       expect(page).to have_button('attack')
+     end
+     scenario 'confirms attack on player 2' do
+       find_button('attack').click
+       expect(page).to have_content('Rabee attacked Josh')
+   end
+end
