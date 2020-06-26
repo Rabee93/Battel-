@@ -6,16 +6,11 @@ xfeature 'Testing infrastructure' do
 end
 
 feature 'Enter Names' do
-  before do
+  scenario 'submitting names' do
     visit('/')
-    fill_in "Name 1", :with => "Player 1"
-    fill_in "Name 2", :with => "Player 2"
-    click_button "Start Game"
+    fill_in :player_1_name, with: 'Dave'
+    fill_in :player_2_name, with: 'Mittens'
+    click_button 'Submit'
+    expect(page).to have_content 'Dave vs. Mittens'
   end
-  scenario 'Player 1 can enter name' do
-    expect(page).to have_text("Player 1")
-  end
-  scenario 'Player 2 can enter name' do
-    expect(page).to have_text("Player 2")
-  end
-end
+end 
